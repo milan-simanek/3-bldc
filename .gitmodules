@@ -1,0 +1,19 @@
+[submodule "sw/BUILDER"]
+	path = sw/BUILDER
+	url = https://github.com/milan-simanek/avr-builder
+[submodule "sw/passive-wait"]
+	path = sw/passive-wait
+	url = https://github.com/milan-simanek/avrm-passive-wait
+	branch = v1.1
+[submodule "sw/libclk"]
+	path = sw/libclk
+	url = https://github.com/milan-simanek/avrm-libclk
+	branch = v1.0
+[submodule "sw/headers"]
+	path = sw/headers
+	url = https://github.com/milan-simanek/avrm-headers
+	branch = v1.0
+[submodule "sw/udelay"]
+	path = sw/udelay
+	url = https://github.com/milan-simanek/avrm-udelay
+	branch = v2.3
