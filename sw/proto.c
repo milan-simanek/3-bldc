@@ -6,6 +6,8 @@
 #include "main.h"
 #include "rot.h"
 #include "sensor.h"
+#include "usart.h"
+#include "comf.h"
 
 #include "avr/io.h"
 
@@ -13,7 +15,7 @@ extern char dbgf;
 char Opts; 
 uchar Int0cnt=0;
 
-unsigned ParseUInt(char **msg) {
+unsigned ParseUInt(const char **msg) {
   unsigned register x;
   char register c;
   x=0; 
@@ -33,7 +35,7 @@ unsigned ParseUInt(char **msg) {
   }
   return x;
 }
-int ParseInt(char **msg) {
+int ParseInt(const char **msg) {
   unsigned register x;
   char register m;
   m=0; 
@@ -69,7 +71,7 @@ void SetSensorOffset(uchar so) {
   SensorOffset8=0;
 }
 
-void ProtoOpts(const char  *p) {
+void ProtoOpts(const char *p) {
   char opt=0;
   switch (*p++) {
   case 's': opt=OPT_ROTSYN; break;
@@ -90,7 +92,7 @@ void ProtoOpts(const char  *p) {
 
 char cnt=30;
 void ProtoReceive(void) {
-  char *msg;
+  const char *msg;
   msg=ComGetMsg();
   switch (*msg++) {
   case 0x0: ComF("...still alive...\r\n");	break;

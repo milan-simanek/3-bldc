@@ -4,7 +4,8 @@ NOLTO=1
 
 PROJECT=main
 
-UNITS=com comasm proto pwm sensor sensor-asm rot tick main
+UNITS=com proto pwm sensor sensor-asm rot tick main
+NOMODUNITS+=usart-rx
 
 include BUILDER/Makefile.generic
 

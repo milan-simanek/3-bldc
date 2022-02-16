@@ -17,3 +17,11 @@
 	path = sw/udelay
 	url = https://github.com/milan-simanek/avrm-udelay
 	branch = v2.3
+[submodule "sw/usart"]
+	path = sw/usart
+	url = https://github.com/milan-simanek/avrm-usart
+	branch = v2.3
+[submodule "sw/comf"]
+	path = sw/comf
+	url = https://github.com/milan-simanek/avrm-comf
+	branch = v1.4

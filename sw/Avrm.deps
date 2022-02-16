@@ -2,3 +2,5 @@ headers		v1.0
 passive-wait	v1.1
 libclk		v1.0
 udelay		v2.3
+usart		v2.3
+comf		v1.4

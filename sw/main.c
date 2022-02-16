@@ -2,6 +2,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
+#include <avr/pgmspace.h>
 #include "main.h"
 #include "libclk.h"
 #include "passive-wait.h"
@@ -15,6 +16,8 @@
 #include "ledkey.h"
 #include "ports.h"
 #include "macro_ports.h"
+#include "usart.h"
+#include "comf.h"
 
 char dbgf=1; // debug flag
 
@@ -109,7 +112,7 @@ int main(void) {
   PortsInit();
   LedkeyInit();  
   MotorOFF();
-  InitCom();
+  UsartInit();
   sleepms(100);
   InitTick();
   InitPWM();
