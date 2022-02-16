@@ -1,0 +1,35 @@
+#!/bin/bash
+
+MS=0.98
+K=1.8
+
+if [ ! -f "$1" ] 
+then
+  echo "Parametr je *.kicad_pcb"
+  echo "Tento script opravi velikosti pajecich plosek takto:"
+  echo " - minimalni prumer plosky je o $MS mm vetsi, nez vrtani diry" 
+  echo " - minimalni prumer plosky je $K-krat vetsi, nez vrtani diry"
+  exit
+fi
+
+SRC="$1.pre_pad_fix"
+DST="$1.pad_fixed"
+cp -v "$1" "$SRC" || exit 1
+
+awk -v MS="$MS" -v K="$K" '
+   BEGIN {CONVFMT="%1.2f";}
+   /^ *\(module / { MOD=$2; print "MOD=" MOD >"/dev/stderr"}
+   /^ *\(pad [0-9]+ thru_hole .*size.*drill/ {
+     x=gensub(/^.*[(]size ([0-9]+(\.?[0-9]*)?) ([0-9]+(\.?[0-9]*)?)\).*$/, "\\1", 1);
+     y=gensub(/^.*[(]size ([0-9]+(\.?[0-9]*)?) ([0-9]+(\.?[0-9]*)?)\).*$/, "\\3", 1);
+     d=gensub(/^.*[(]drill ([0-9]+(\.?[0-9]*)?)\).*$/, "\\1", 1);
+#printf "x=%f,y=%f,d=%f  => ", x, y, d >"/dev/stderr";
+     m=d+MS; if (m<d*K) m=d*K;
+     if (MOD=="moje:RJ45-small") m=1.6;
+     if (x<m) x=m"";
+     if (y<m) y=m"";
+printf "x=%f,y=%f : %s\n", x, y, $0 >"/dev/stderr";
+     gsub(/[(]size ([0-9]+(\.?[0-9])?) ([0-9]+(\.?[0-9])?)\)/, "(size "x" "y")");
+   }
+   {print $0;}
+' < "$SRC" > "$DST" && mv -v "$DST" "$1"
