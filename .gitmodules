@@ -25,3 +25,7 @@
 	path = sw/comf
 	url = https://github.com/milan-simanek/avrm-comf
 	branch = v1.4
+[submodule "sw/ledkey"]
+	path = sw/ledkey
+	url = https://github.com/milan-simanek/avrm-ledkey
+	branch = v1.0
